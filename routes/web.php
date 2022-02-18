@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DividendsController;
+use App\Http\Controllers\StocksController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//dividends
+Route::get('/dividends', [DividendsController::class, 'index'])->name('dividends');
+//Route::post('/dividends', [DividendsController::class, 'store']);
+
+//stocks
+Route::get('/stocks', [stocksController::class, 'index'])->name('stocks');
+//Route::post('/stocks', [stocksController::class, 'store']);
+
+// login
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'store']);
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
