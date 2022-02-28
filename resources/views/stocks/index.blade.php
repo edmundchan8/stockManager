@@ -54,7 +54,7 @@
         </tbody>
     </table>
 
-    <h6>Total Investments: </h6>
+    <h6>Total Investments: ${{ $stocks->sum('total') }} </h6>
     <h6>Total Stocks: {{ $stocks->sum('quantity') }}</h6>
     <a href="#">Back to main page</a>
 @endsection
