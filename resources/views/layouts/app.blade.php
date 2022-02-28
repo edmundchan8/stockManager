@@ -12,6 +12,23 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+        <ul class="navbar-nav">
+            @if (Request::is('stocks'))
+                <li class="nav-item active" style="margin-right: 2rem;">
+                    <a class="nav-link h5" href="addStocks">Add Stocks</a>
+                  </li>
+                  <li class="nav-item" style="margin-right: 2rem;">
+                    <a class="nav-link h5" href="filterStocks">Filter Stocks</a>
+                  </li>
+            @elseif (Request::is('dividends'))
+            <li class="nav-item active" style="margin-right: 2rem;">
+                <a class="nav-link h5" href="addDividends">Add Dividends</a>
+              </li>
+              <li class="nav-item" style="margin-right: 2rem;">
+                <a class="nav-link h5" href="filterDividends">Filter Dividends</a>
+              </li>
+            @endif
+          </ul>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item active" style="margin-right: 2rem;">
             <a class="nav-link h5
