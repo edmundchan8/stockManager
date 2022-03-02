@@ -1,40 +1,40 @@
 @extends ('layouts.app')
-@section('content')
-    <h4>User Stocks</h4>
+@section('content') 
+<h4>User Stocks</h4>
 
-    <h6>Add a Stock</h6>
-    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#addStockAccordion" aria-expanded="false" aria-controls="collapseTwo">
-        Accordion Item #2
-    </button>
-    <div id="addStockAccordion" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
-            <!-- Add Stock, Price bought/sold, Date and Qty -->
-            <form method="POST" action="../includes/addStock.inc.php">
-                <div class="form-group m-3">
-                    <input type="checkbox" name="newStock">
-                    <small>New Stock?</small>
-                    <br>
-                    <input class="form-control" type="hidden" name="current_stock_db" value="yauyau_stocks">
-                    <label>Stock Name</label>
-                    <input class="w-25" type="text" name="stockName" value="">
-                    <label>Ticker Symbol</label>
-                    <input class="w-25" type="text" name="tickerSymbol" value="">
-                    <label class="w-25 mt-3 mb-3">Buy/Sell Price</label>
-                    <select name="buyOrSell">
-                        <option value="buy">Buy</option>
-                        <option value="sell">Sell</option>
-                    </select>
-                    <input class="w-25" type="text" name="stockPrice" value="">
-                    <label>Amount</label>
-                    <input class="w-25" type="text" name="stockQty" value="">
-                    <label>Add Date?</label>
-                    <input class="w-25 mb-2" type="text" name="date" value="" placeholder="YYYY/MM/DD">
-                    <input type="submit" value="Add">
-                </div>
-            </form>
-        </div>
+{{-- Adding a stock code --}}
+<div id="accordion">
+    <div class="panel">
+        <!-- Add Stock, Price bought/sold, Date and Qty -->
+        <form method="POST" action="{{url('stocks')}}">
+            @csrf
+            <div class="form-group m-3">
+                <input type="checkbox" name="newStock">
+                <small>New Stock?</small>
+                <br>
+                <input class="form-control" type="hidden" name="current_stock_db" value="yauyau_stocks">
+                <label>Stock Name</label>
+                <input class="w-25" type="text" name="stockName" value="{{ old('stockName') }}">
+                <label>Ticker Symbol</label>
+                <input class="w-25" type="text" name="tickerSymbol" value="{{ old('tickerSymbol') }}">
+                <br/>
+                <select name="buyOrSell">
+                    <option value="buy">Buy</option>
+                    <option value="sell">Sell</option>
+                </select>
+                <label class=mt-3 mb-3">Buy/Sell Price</label>
+                <input class="w-25" type="text" name="stockPrice" value="{{ old('stockPrice') }}">
+                <label>Amount</label>
+                <input class="w-25" type="text" name="stockQty" value="{{ old('stockQty') }}">
+                <label>Add Date?</label>
+                <input class="w-25 mb-2" type="text" name="date" value="{{ old('date') }}" placeholder="YYYY/MM/DD">
+                <input type="submit" value="Add">
+            </div>
+        </form>
     </div>
-    <a href="../index.php">Back to main page</a>
+</div>
+
+{{-- Displaying current stocks from database  --}}
 
     <h5>Stock Portfolio</h5>
     <table class="table">
@@ -52,9 +52,11 @@
             </tr>
             @endforeach
         </tbody>
-    </table>
+    <tr>
+        <th>Total Investments: ${{ $stocks->sum('total') }}</th>
+        <th>Total Stocks: {{ $stocks->sum('quantity') }}</th>
+    </tr>
+</table>
 
-    <h6>Total Investments: ${{ $stocks->sum('total') }} </h6>
-    <h6>Total Stocks: {{ $stocks->sum('quantity') }}</h6>
     <a href="#">Back to main page</a>
 @endsection

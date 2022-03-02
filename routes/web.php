@@ -21,6 +21,7 @@ Route::get('/dividends', [DividendsController::class, 'index'])->name('dividends
 
 //stocks
 Route::get('/stocks', [stocksController::class, 'index'])->name('stocks');
+Route::post('/stocks', [stocksController::class, 'store']);
 
 //Route::post('/stocks', [stocksController::class, 'store']);
 

@@ -1,6 +1,6 @@
 @extends ('layouts.app')
-@section('content')
-    <h6>Add Stocks</h6>
+@section('content')   
+<h6>Add Stocks</h6>
     <!-- Add Stock, Price bought/sold, Date and Qty -->
     <form method="POST" action="../includes/addStock.inc.php">
         <input type="hidden" name="current_stock_db" value="yauyau_stocks">
