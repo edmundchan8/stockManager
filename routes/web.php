@@ -17,13 +17,12 @@ use App\Http\Controllers\StocksController;
 
 //dividends
 Route::get('/dividends', [DividendsController::class, 'index'])->name('dividends');
-//Route::post('/dividends', [DividendsController::class, 'store']);
+Route::post('/dividends', [DividendsController::class, 'store']);
 
 //stocks
-Route::get('/stocks', [stocksController::class, 'index'])->name('stocks');
-Route::post('/stocks', [stocksController::class, 'store']);
+Route::get('/stocks', [StocksController::class, 'index'])->name('stocks');
+Route::post('/stocks', [StocksController::class, 'store']);
 
-//Route::post('/stocks', [stocksController::class, 'store']);
 
 // login
 Route::get('/login', [LoginController::class, 'index'])->name('login');

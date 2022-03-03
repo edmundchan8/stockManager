@@ -24,9 +24,6 @@
                     <a class="nav-link h5" href="filterStocks">Filter Stocks</a>
                   </li>
             @elseif (Request::is('dividends'))
-            <li class="nav-item active" style="margin-right: 2rem;">
-                <a class="nav-link h5" href="addDividends">Add Dividends</a>
-              </li>
               <li class="nav-item" style="margin-right: 2rem;">
                 <a class="nav-link h5" href="filterDividends">Filter Dividends</a>
               </li>
