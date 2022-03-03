@@ -18,7 +18,7 @@
         <ul class="navbar-nav">
             @if (Request::is('stocks'))
                 <li class="nav-item active" style="margin-right: 2rem;">
-                    <a class="nav-link h5" href="addStocks">Add Stocks</a>
+                    <a class="nav-link h5" href="addStocks">(NAME OF?) Stocks</a>
                   </li>
                   <li class="nav-item" style="margin-right: 2rem;">
                     <a class="nav-link h5" href="filterStocks">Filter Stocks</a>
