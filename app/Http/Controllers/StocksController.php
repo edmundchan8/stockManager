@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class StocksController extends Controller
 {
@@ -24,7 +25,14 @@ class StocksController extends Controller
 
     public function store(Request $request){
 
-        //should run validation checks here
+        // Form validation
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'buyOrSell' => 'required',
+            'price'=>'required',
+            'quantity' => 'required'
+        ]);
 
         $name = $request->stockName;
         $tickerSymbol = $request->tickerSymbol;
@@ -37,9 +45,9 @@ class StocksController extends Controller
         DB::table('yauyau_stocks')->insert(
             ['name' => $name, 'tickerSymbol' => $tickerSymbol, 'buySell'=> $buyOrSell, 'price' => $price, 'quantity' => $quantity, 'date' => $date]
         );
-
-        // if validations work, redirect to index
-        return Redirect::to('stocks/index');
+        // if validations work, redirect to previous page (index page)
+        // have a section called 'success', that when is 'has' on the view blade, will show a notification that says the form submission was successful
+        return back()->with('success', 'Your stock was successfully added!');
         // if validation didn't work, we should return an error, like e.g.
         // return Redirect::to('stocks/index')->with('message', 'Failed to Add Stock');
     }

@@ -4,6 +4,20 @@
 
 {{-- Adding a stock code --}}
 <div id="accordion">
+    @if(Session::has('success'))
+            <div class="alert alert-success text-center">
+                {{Session::get('success')}}
+            </div>
+    @endif
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <div class="panel">
         <!-- Add Stock, Price bought/sold, Date and Qty -->
         <form method="POST" action="{{url('stocks')}}">
