@@ -17,6 +17,52 @@ class DividendsController extends Controller
         return view('dividends.index', ['dividends' => $dividends]);
     }
 
+    public function filter()
+    {
+        $dividends = DB::table('dividends')
+            ->selectRaw('
+            EXTRACT(year FROM date) as year,
+            EXTRACT(month FROM date) as month,
+             name, amount
+             ')
+            ->get();
+
+        //array to hold each unique year
+        $years = [];
+        $yearsTotal = [];
+
+        // foreach calculation to find each unique year
+        foreach ($dividends as $dividend){
+            if(!in_array($dividend->year, $years)){
+                array_push($years, $dividend->year);
+            }
+        }
+
+        //creating the JSON for yearsTotal to use later
+        foreach($years as $year){
+            $yearsTotal += array($year => 0);
+        }
+
+        //foreach calculation to sum up total dividends per year using
+        // the $yearsTotal json created earlier
+
+        foreach($dividends as $key=>$value){
+            $year = $value->year;
+            $amount = $value->amount;
+            $yearsTotal[$year] += $amount;
+        }
+
+        // $dividends = DB::table('dividends')
+        //     ->groupBy('name')
+        //     ->selectRaw('SUM(amount) as amount, name')
+        //     ->get();
+
+        return view('dividends.filterDividends') //, ['dividends' => $dividends, 'year' => $years]);
+            ->with('dividends', $dividends)
+            ->with('years', json_encode($years))
+            ->with('yearsTotal', json_encode($yearsTotal));
+    }
+
     public function store(Request $request){
 
         // Form validation

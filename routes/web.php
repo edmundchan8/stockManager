@@ -17,7 +17,9 @@ use App\Http\Controllers\StocksController;
 
 //dividends
 Route::get('/dividends', [DividendsController::class, 'index'])->name('dividends');
+Route::get('/filterDividends', [DividendsController::class, 'filter'])->name('filterDividends');
 Route::post('/dividends', [DividendsController::class, 'store']);
+
 
 //stocks
 Route::get('/stocks', [StocksController::class, 'index'])->name('stocks');

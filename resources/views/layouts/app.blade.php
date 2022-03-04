@@ -23,7 +23,10 @@
                   <li class="nav-item" style="margin-right: 2rem;">
                     <a class="nav-link h5" href="filterStocks">Filter Stocks</a>
                   </li>
-            @elseif (Request::is('dividends'))
+            @elseif (Request::is('dividends', 'filterDividends'))
+            <li class="nav-item" style="margin-right: 2rem;">
+              <a class="nav-link h5" href="dividends">Edmund's Dividends</a>
+            </li>
               <li class="nav-item" style="margin-right: 2rem;">
                 <a class="nav-link h5" href="filterDividends">Filter Dividends</a>
               </li>
