@@ -10,11 +10,13 @@
 
     /*convert json string to json? */
     const yearData = {!! $yearsTotal !!};
+    const yearTotals = [];
 
-    const newData = [];
-    for(var i = 0; i < yearData.length; i++) {
-        newData.push(yearData[i]);
-}
+    // convert the new json to an object that has a key value pair
+    // then push the value to the yearTotals array for use
+    for (let [key, value] of Object.entries(yearData)) {
+        yearTotals.push(value);
+    }
 
     const data = {
       labels: labels,
@@ -22,7 +24,7 @@
         label: 'Dividends',
         backgroundColor: 'rgb(255, 99, 132)',
         borderColor: 'rgb(255, 99, 132)',
-        data: newData
+        data: yearTotals
       }]
     };
   
