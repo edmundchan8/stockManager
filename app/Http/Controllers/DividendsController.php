@@ -27,6 +27,7 @@ class DividendsController extends Controller
              ')
             ->get();
 
+        /** SETTING THE YEARLY DATA  */
         //array to hold each unique year
         $years = [];
         $yearsTotal = [];
@@ -52,15 +53,39 @@ class DividendsController extends Controller
             $yearsTotal[$year] += $amount;
         }
 
-        // $dividends = DB::table('dividends')
-        //     ->groupBy('name')
-        //     ->selectRaw('SUM(amount) as amount, name')
-        //     ->get();
+        /** SETTING THE MONTHLY DATA  */
+        //array to hold each unique year
+        $months = [];
+        $monthsTotal = [];
+
+        // foreach calculation to find each unique year
+        foreach ($dividends as $dividend){
+            $monYea = $dividend->month . "-" . $dividend->year;
+            if(!in_array($monYea, $months)){
+                array_push($months, $monYea);
+            }
+        }
+
+        //creating the JSON for monthsTotal to use later
+        foreach($months as $monYea){
+            $monthsTotal += array($monYea => 0);
+        }
+
+        //foreach calculation to sum up total dividends per month using
+        // the $monthsTotal json created earlier
+
+        foreach($dividends as $key=>$value){
+            $monYea = $value->month . "-" . $value->year;
+            $amount = $value->amount;
+            $monthsTotal[$monYea] += $amount;
+        }
 
         return view('dividends.filterDividends') //, ['dividends' => $dividends, 'year' => $years]);
             ->with('dividends', $dividends)
             ->with('years', json_encode($years))
-            ->with('yearsTotal', json_encode($yearsTotal));
+            ->with('yearsTotal', json_encode($yearsTotal))
+            ->with('months', json_encode($months))
+            ->with('monthsTotal', json_encode($monthsTotal));
     }
 
     public function store(Request $request){
