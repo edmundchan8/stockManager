@@ -28,6 +28,9 @@
         <th>Total Investments: ${{ $stocks->sum('total') }}</th>
         <th>Total Stocks: {{ $stocks->sum('quantity') }}</th>
     </tr>
+    <tr>
+        <th>Last Stock Added: {{ $lastStock->quantity }} x {{ $lastStock->name }} at {{ $lastStock->price }}</th>
+    </tr>
 </table>
 
     <a href="#">Back to main page</a>
