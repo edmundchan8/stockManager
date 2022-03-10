@@ -17,6 +17,7 @@ class DividendsController extends Controller
         return view('dividends.index', ['dividends' => $dividends]);
     }
 
+    // filter Dividends
     public function filter()
     {
         $dividends = DB::table('dividends')
@@ -94,15 +95,19 @@ class DividendsController extends Controller
         $validated = $request->validate([
             'stockName' => 'required',
             'amount' => 'required',
-            'tickerSymbol' => 'required',
-            'date'=>'required'
+            'tickerSymbol' => 'required'
         ]);
 
         $name = $request->stockName;
         $tickerSymbol = $request->tickerSymbol;
         $amount = $request->amount;
-        $date = $request->date;
-        
+        if ($request->date == null){
+            $date = date("Y-m-d");
+        }
+        else{
+            $date = $request->date;
+        }
+
         // add stock to database
         DB::table('dividends')->insert(
             ['name' => $name, 

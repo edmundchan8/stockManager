@@ -39,7 +39,12 @@ class StocksController extends Controller
         $buyOrSell = $request->buyOrSell;
         $price = $request->stockPrice;
         $quantity = $request->stockQty;
-        $date = $request->date;
+        if ($request->date == null){
+            $date = date("Y-m-d");
+        }
+        else{
+            $date = $request->date;
+        }
         
         // add stock to database
         DB::table('yauyau_stocks')->insert(
