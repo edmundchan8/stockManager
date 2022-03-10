@@ -29,7 +29,7 @@
         <th>Total Stocks: {{ $stocks->sum('quantity') }}</th>
     </tr>
     <tr>
-        <th>Last Stock Added: {{ $lastStock->quantity }} x {{ $lastStock->name }} at {{ $lastStock->price }}</th>
+        <th>Last Stock Added: {{ $lastStock->name }} on {{ $lastStock->date }}</th>
     </tr>
 </table>
 
