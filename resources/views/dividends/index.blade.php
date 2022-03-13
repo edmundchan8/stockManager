@@ -26,6 +26,9 @@
     <tr>
         <th>Total Dividend Given Out: ${{ $dividends->sum('amount') }}</th>
     </tr>
+    <tr>
+        <th>Last Dividend added: {{ $lastDiv->name }} on {{ $lastDiv->date }}</th>
+    </tr>
 </table>
 
     <a href="#">Back to main page</a>

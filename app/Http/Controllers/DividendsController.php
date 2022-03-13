@@ -14,7 +14,15 @@ class DividendsController extends Controller
             ->groupBy('name')
             ->selectRaw('SUM(amount) as amount, name')
             ->get();
-        return view('dividends.index', ['dividends' => $dividends]);
+        
+        // Getting the last dividend added to the database
+        $lastDividend = DB::table('dividends')
+            ->latest('date')
+            ->first();
+        
+        return view('dividends.index')
+        ->with('dividends', $dividends)
+        ->with('lastDiv', $lastDividend);
     }
 
     // filter Dividends
