@@ -19,7 +19,7 @@ use App\Http\Controllers\StocksController;
 Route::get('/dividends', [DividendsController::class, 'index'])->name('dividends');
 Route::get('/filterDividends', [DividendsController::class, 'filter'])->name('filterDividends');
 Route::post('/dividends', [DividendsController::class, 'store']);
-
+Route::get('/show/{stockName}', [DividendsController::class, 'show']);
 
 //stocks
 Route::get('/stocks', [StocksController::class, 'index'])->name('stocks');

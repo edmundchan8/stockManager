@@ -127,4 +127,12 @@ class DividendsController extends Controller
         // have a section called 'success', that when is 'has' on the view blade, will show a notification that says the form submission was successful
         return back()->with('success', 'Your dividend was successfully added!');
     }
+
+    public function show($stockName){
+        $stock = DB::table('dividends')
+        ->where('name', '=', $stockName)
+        ->get();
+
+        dd($stock);
+    }
 }
