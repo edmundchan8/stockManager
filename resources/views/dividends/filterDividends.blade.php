@@ -104,6 +104,6 @@
 </form>
 
 <br/>
-<a href="../index.php">Back to main page</a>
+<a href="/dividends">Back to main page</a>
 
 @endsection

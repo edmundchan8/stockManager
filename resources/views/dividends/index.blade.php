@@ -31,5 +31,5 @@
     </tr>
 </table>
 
-    <a href="#">Back to main page</a>
+    <a href="/">Back to main page</a>
 @endsection

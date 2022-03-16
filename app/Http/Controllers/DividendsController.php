@@ -133,6 +133,8 @@ class DividendsController extends Controller
         ->where('name', '=', $stockName)
         ->get();
 
-        dd($stock);
+        return view('dividends.dividendView')
+        ->with('name', $stockName)
+        ->with('stock', $stock);
     }
 }
