@@ -26,15 +26,23 @@ class DividendsController extends Controller
     }
 
     // filter Dividends
-    public function filter()
+    public function filter(Request $request)
     {
-        $dividends = DB::table('dividends')
+        $query = DB::table('dividends')
             ->selectRaw('
             EXTRACT(year FROM date) as year,
             EXTRACT(month FROM date) as month,
              name, amount
-             ')
-            ->get();
+             ');
+        if ($request->name != null){
+            $query = $query->where('name', '=', $request->name);
+        }
+        if ($request->tickerSymbol != null){
+            $query = $query->where('tickerSymbol', '=', $request->tickerSymbol);
+        }
+        $dividends = $query->get();
+
+        //dd($request->name);
 
         /** SETTING THE YEARLY DATA  */
         //array to hold each unique year

@@ -92,15 +92,14 @@
 
 <h4>Dividend Filter</h4>
 
-<form method="GET">
-    <input type="hidden" name="current_dividend_db" value="dividends">
+<form method="GET"  action="{{url('filterDividends')}}">
+    <input type="hidden" name="current_dividend_db" value="dividend">
     <label>Name of Dividend</label>
     <input type="text" name="name" placeholder="name"/>
     <br/>
-    <label>Date</label>
-    <input type="text" name="date" placeholder="date"/>
+    <label>TickerSymbol</label>
+    <input type="text" name="tickerSymbol" placeholder="tickerSymbol"/>
     <input type="submit" name="filter" value="Search"/>
-
 </form>
 
 <br/>
