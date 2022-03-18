@@ -64,4 +64,14 @@ class StocksController extends Controller
         // if validation didn't work, we should return an error, like e.g.
         // return Redirect::to('stocks/index')->with('message', 'Failed to Add Stock');
     }
+
+    public function show($stockName){
+        $stock = DB::table('yauyau_stocks')
+        ->where('name', '=', $stockName)
+        ->get();
+
+        return view('stocks.stockView')
+        ->with('name', $stockName)
+        ->with('stock', $stock);
+    }
 }

@@ -1,7 +1,7 @@
 @extends ('layouts.app')
 @section('content') 
 
-<h4>User(NAME?) Stocks</h4>
+<h4>Yau Yau's Stocks</h4>
 
 {{-- Add stocks component --}}
 @include('stocks.addStocks')
@@ -19,7 +19,7 @@
         <tbody>
             @foreach($stocks as $stock)
             <tr>
-                <th>{{$stock->name}}</th>
+                <th><a href="/show/{{$stock->name}}" class="text-decoration-none">{{$stock->name}}</a></th>
                 <td>{{$stock->quantity}}</td>
             </tr>
             @endforeach
