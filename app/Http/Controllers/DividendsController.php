@@ -97,12 +97,20 @@ class DividendsController extends Controller
             $monthsTotal[$monYea] += $amount;
         }
 
+        /** Dividend data for last 12 months */
+        $previous_year_date = date("Y-m-d", strtotime("-1 year"));
+        $lastTwelveMonths = DB::table('dividends')
+            ->select('amount')
+            ->where('date','>=', $previous_year_date)
+            ->sum('amount');
+
         return view('dividends.filterDividends') //, ['dividends' => $dividends, 'year' => $years]);
             ->with('dividends', $dividends)
             ->with('years', json_encode($years))
             ->with('yearsTotal', json_encode($yearsTotal))
             ->with('months', json_encode($months))
-            ->with('monthsTotal', json_encode($monthsTotal));
+            ->with('monthsTotal', json_encode($monthsTotal))
+            ->with('lastTwelveMonths', json_encode((float)$lastTwelveMonths));
     }
 
     public function store(Request $request){

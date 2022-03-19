@@ -18,7 +18,7 @@
         <tbody>
             @foreach($dividends as $dividend)
             <tr>
-                <th><a href="show/{{ $dividend->name }}" class="text-decoration-none">{{$dividend->name}}</a></th>
+                <th><a href="dividends/{{ $dividend->name }}" class="text-decoration-none">{{$dividend->name}}</a></th>
                 <td>{{$dividend->amount}}</td>
             </tr>
             @endforeach

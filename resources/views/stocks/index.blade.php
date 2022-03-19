@@ -19,7 +19,7 @@
         <tbody>
             @foreach($stocks as $stock)
             <tr>
-                <th><a href="/show/{{$stock->name}}" class="text-decoration-none">{{$stock->name}}</a></th>
+                <th><a href="/stocks/{{$stock->name}}" class="text-decoration-none">{{$stock->name}}</a></th>
                 <td>{{$stock->quantity}}</td>
             </tr>
             @endforeach

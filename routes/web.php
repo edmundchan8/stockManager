@@ -19,12 +19,12 @@ use App\Http\Controllers\StocksController;
 Route::get('/dividends', [DividendsController::class, 'index'])->name('dividends');
 Route::get('/filterDividends', [DividendsController::class, 'filter'])->name('filterDividends');
 Route::post('/dividends', [DividendsController::class, 'store']);
-Route::get('/show/{stockName}', [DividendsController::class, 'show']);
+Route::get('/dividends/{stockName}', [DividendsController::class, 'show']);
 
 //stocks
 Route::get('/stocks', [StocksController::class, 'index'])->name('stocks');
 Route::post('/stocks', [StocksController::class, 'store']);
-Route::get('/show/{stockName}', [StocksController::class, 'show']);
+Route::get('/stocks/{stockName}', [StocksController::class, 'show']);
 
 // login
 Route::get('/login', [LoginController::class, 'index'])->name('login');
