@@ -24,7 +24,9 @@
             @endforeach
         </tbody>
     <tr>
-        <th>Total Cost: ${{ $stock->sum('price') }}</th>
+        
+        <th>Total Cost: ${{ $total }}</th>
+        <th>Average Cost per Share: ${{ $total/$stock->sum('quantity') }}</th>
         <th>Total Stocks: {{ $stock->sum('quantity') }}</th>
     </tr>
     <tr>

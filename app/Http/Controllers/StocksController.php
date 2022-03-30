@@ -35,11 +35,10 @@ class StocksController extends Controller
 
         // Form validation
         $validated = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
+            'stockName' => 'required',
             'buyOrSell' => 'required',
-            'price'=>'required',
-            'quantity' => 'required'
+            'stockPrice'=>'required',
+            'stockQty' => 'required'
         ]);
 
         $name = $request->stockName;
@@ -47,11 +46,17 @@ class StocksController extends Controller
         $buyOrSell = $request->buyOrSell;
         $price = $request->stockPrice;
         $quantity = $request->stockQty;
+        $message = "Your stock was successfully added!";
         if ($request->date == null){
             $date = date("Y-m-d");
         }
         else{
             $date = $request->date;
+        }
+
+        if ($buyOrSell == 'sell'){
+            $quantity *= -1;
+            $message = "Your stock was successfully removed!";
         }
         
         // add stock to database
@@ -60,18 +65,25 @@ class StocksController extends Controller
         );
         // if validations work, redirect to previous page (index page)
         // have a section called 'success', that when is 'has' on the view blade, will show a notification that says the form submission was successful
-        return back()->with('success', 'Your stock was successfully added!');
+        return back()->with('success', $message);
         // if validation didn't work, we should return an error, like e.g.
         // return Redirect::to('stocks/index')->with('message', 'Failed to Add Stock');
     }
 
     public function show($stockName){
         $stock = DB::table('yauyau_stocks')
-        ->where('name', '=', $stockName)
-        ->get();
+            ->where('name', '=', $stockName)
+            ->get();
+
+         $total = DB::table('yauyau_stocks')
+            ->where('name', '=', $stockName)
+            ->sum(DB::raw('price * quantity'));
+
+        //dd($total);
 
         return view('stocks.stockView')
         ->with('name', $stockName)
+        ->with('total', $total)
         ->with('stock', $stock);
     }
 }

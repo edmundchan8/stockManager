@@ -18,10 +18,12 @@
         </thead>
         <tbody>
             @foreach($stocks as $stock)
-            <tr>
-                <th><a href="/stocks/{{$stock->name}}" class="text-decoration-none">{{$stock->name}}</a></th>
-                <td>{{$stock->quantity}}</td>
-            </tr>
+                @if ($stock->quantity != 0)
+                    <tr>
+                        <th><a href="/stocks/{{$stock->name}}" class="text-decoration-none">{{$stock->name}}</a></th>
+                        <td>{{$stock->quantity}}</td>
+                    </tr>
+                @endif
             @endforeach
         </tbody>
     <tr>
@@ -29,7 +31,7 @@
         <th>Total Stocks: {{ $stocks->sum('quantity') }}</th>
     </tr>
     <tr>
-        <th>Last Stock Added: {{ $lastStock->name }} on {{ $lastStock->date }}</th>
+        <th>Last Stock Added/Removed: {{ $lastStock->name }} on {{ $lastStock->date }}</th>
     </tr>
 </table>
 
