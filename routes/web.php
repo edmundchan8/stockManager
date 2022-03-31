@@ -22,7 +22,7 @@ Route::post('/dividends', [DividendsController::class, 'store']);
 Route::get('/dividends/{stockName}', [DividendsController::class, 'show']);
 
 //stocks
-Route::get('/stocks', [StocksController::class, 'index'])->name('stocks');
+Route::get('/stocks/{owner?}', [StocksController::class, 'index'])->name('stocks');
 Route::post('/stocks', [StocksController::class, 'store']);
 Route::get('/stocks/{stockName}', [StocksController::class, 'show']);
 
