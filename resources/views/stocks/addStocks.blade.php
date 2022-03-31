@@ -22,7 +22,7 @@
                 <input type="checkbox" name="newStock">
                 <small>New Stock?</small>
                 <br>
-                <input class="form-control" type="hidden" name="current_stock_db" value="yauyau_stocks">
+                <input class="form-control" type="hidden" name="current_stock_db" value="stocks">
                 <label>Stock Name</label>
                 <input class="w-25" type="text" name="stockName" value="{{ old('stockName') }}">
                 <label>Ticker Symbol</label>
@@ -38,6 +38,10 @@
                 <input class="w-25" type="text" name="stockQty" value="{{ old('stockQty') }}">
                 <label>Add Date?</label>
                 <input class="w-25 mb-2" type="text" name="date" value="{{ old('date') }}" placeholder="YYYY/MM/DD">
+                <select name="owner">
+                    <option value="yauyau">Yau Yau</option>
+                    <option value="edmund">Edmund</option>
+                </select>
                 <input type="submit" value="Add">
             </div>
         </form>
