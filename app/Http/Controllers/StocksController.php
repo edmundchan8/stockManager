@@ -75,6 +75,7 @@ class StocksController extends Controller
     public function show($stockName){
         $stock = DB::table('stocks')
             ->where('name', '=', $stockName)
+            ->orderBy('date')
             ->get();
 
          $total = DB::table('stocks')
