@@ -1,7 +1,7 @@
 @extends ('layouts.app')
 @section('content') 
 
-<h4>Stocks</h4>
+<h4>Yau Yau's Stocks</h4>
 
 {{-- Add stocks component --}}
 @include('stocks.addStocks')
@@ -14,7 +14,6 @@
             <tr>
                 <th scope="col">Stock</th>
                 <th scope="col">Stock Qty</th>
-                <th scope="col">Owner</th>
             </tr>
         </thead>
         <tbody>
@@ -23,7 +22,6 @@
                     <tr>
                         <th><a href="/stocks/{{$stock->name}}" class="text-decoration-none">{{$stock->name}}</a></th>
                         <td>{{$stock->quantity}}</td>
-                        <td>{{ $stock->owner }}</td>
                     </tr>
                 @endif
             @endforeach

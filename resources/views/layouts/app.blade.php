@@ -16,17 +16,14 @@
 <body>
     <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
         <ul class="navbar-nav">
-            @if (Request::is('stocks/*'))
+            @if (Request::is('stocks*'))
                 <li class="nav-item active" style="margin-right: 2rem;">
-                  <a class="nav-link h5" href="/stocks/index">All Stocks</a>
+                  <a class="nav-link h5" href="/stocks">Yau Yau's Stocks</a>
                 </li>
                 <li class="nav-item active" style="margin-right: 2rem;">
-                  <a class="nav-link h5" href="/stocks/yauyau">Yau Yau's Stocks</a>
+                  <a class="nav-link h5" href="/stocks">Edmund Stocks</a>
                 </li>
-                <li class="nav-item active" style="margin-right: 2rem;">
-                  <a class="nav-link h5" href="/stocks/edmund">Edmund Stocks</a>
-                </li>
-            @elseif (Request::is('dividends', 'filterDividends'))
+            @elseif (Request::is('dividends*', 'filterDividends*'))
             <li class="nav-item" style="margin-right: 2rem;">
               <a class="nav-link h5" href="/dividends">Edmund's Dividends</a>
             </li>
@@ -42,7 +39,7 @@
           </li>
           <li class="nav-item" style="margin-right: 2rem;">
             <a class="nav-link h5
-            " href="{{ route('stocks', ['owner' => null])}}">Stocks</a>
+            " href="/stocks">Stocks</a>
           </li>
           <li class="nav-item" style="margin-right: 2rem;">
             <a class="nav-link h5
