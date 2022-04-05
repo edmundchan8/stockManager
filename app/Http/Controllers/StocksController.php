@@ -23,7 +23,7 @@ class StocksController extends Controller
         
         $stocks = DB::table('stocks')
             ->groupBy('name')
-            ->selectRaw('SUM(quantity) as quantity, SUM(quantity*price) as total, name')
+            ->selectRaw('SUM(quantity) as quantity, SUM(quantity*price) as total, MIN(owner) as owner, name')
             ->get();
 
         return view('stocks.index')

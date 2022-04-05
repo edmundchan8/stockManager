@@ -11,6 +11,7 @@
                 <th scope="col">Price Per Share</th>
                 <th scope="col">Quantity Bought/Sold</th>
                 <th scope="col">Total Cost</th>
+                <th scope="col">Owner</th>
             </tr>
         </thead>
         <tbody>
@@ -20,6 +21,7 @@
                 <td>{{$eachStock->price}}</td>
                 <td>{{$eachStock->quantity}}</td>
                 <td>{{$eachStock->quantity * $eachStock->price}}</td>
+                <td>{{$eachStock->owner}}</td>
             </tr>
             @endforeach
         </tbody>
