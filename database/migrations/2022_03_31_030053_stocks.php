@@ -17,7 +17,7 @@ class Stocks extends Migration
             $table->id();
             $table->string('name');
             $table->string('tickerSymbol');
-            $table->integer('quantity');
+            $table->decimal('quantity', 10, 3);
             $table->date('date')->nullable();
             $table->string('buySell');
             $table->decimal('price', 10, 2);

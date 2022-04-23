@@ -39,8 +39,8 @@
                 <label>Add Date?</label>
                 <input class="w-25 mb-2" type="text" name="date" value="{{ old('date') }}" placeholder="YYYY/MM/DD">
                 <select name="owner">
-                    <option value="yauyau">Yau Yau</option>
                     <option value="edmund">Edmund</option>
+                    <option value="yauyau">Yau Yau</option>
                 </select>
                 <input type="submit" value="Add">
             </div>

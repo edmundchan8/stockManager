@@ -1,7 +1,7 @@
 @extends ('layouts.app')
 @section('content') 
 
-<h4>Yau Yau's Stocks</h4>
+<h4>Stock Portfolio</h4>
 
 {{-- Add stocks component --}}
 @include('stocks.addStocks')

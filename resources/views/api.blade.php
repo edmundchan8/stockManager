@@ -1,28 +1,63 @@
 <?php
 
-$curl = curl_init();
+// $headers = [
+//     "x-api-key: ikpSY4wP1r9r3cNsFMsf12zFmHLDansa6rkkDzGz"
+// ];
 
-curl_setopt_array($curl, [
-	CURLOPT_URL => "https://yfapi.net/v7/finance/options/AAPL",
-	CURLOPT_RETURNTRANSFER => true,
-	CURLOPT_FOLLOWLOCATION => true,
-	CURLOPT_ENCODING => "",
-	CURLOPT_MAXREDIRS => 10,
-	CURLOPT_TIMEOUT => 30,
-	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-	CURLOPT_CUSTOMREQUEST => "GET",
-	CURLOPT_HTTPHEADER => [
-		"x-api-key: Iuj3DGief87l3wRWLgJbm2g7eOjXVwlm8dQSHy24"
-	],
-]);
+// // Initiate the curl request
+// $ch = curl_init("https://yfapi.net/v7/finance/options/AAPL");
 
-$response = curl_exec($curl);
-$err = curl_error($curl);
+// // // This will ignore any ssl checks on the url, allowing the api call to go ahead
+// // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 
-curl_close($curl);
+// // // attach header to request
+// // curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-if ($err) {
-	echo "cURL Error #:" . $err;
-} else {
-	echo $response;
-}
+// curl_setopt_array($ch, [
+// 	CURLOPT_URL => "https://yfapi.net/v7/finance/options/AAPL",
+//     CURLOPT_SSL_VERIFYPEER => 0,
+// 	CURLOPT_RETURNTRANSFER => true,
+// 	CURLOPT_FOLLOWLOCATION => true,
+// 	CURLOPT_ENCODING => "",
+// 	CURLOPT_MAXREDIRS => 10,
+// 	CURLOPT_TIMEOUT => 30,
+// 	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+// 	CURLOPT_CUSTOMREQUEST => "GET",
+// 	CURLOPT_HTTPHEADER => [
+// 		"x-api-key: ikpSY4wP1r9r3cNsFMsf12zFmHLDansa6rkkDzGz"
+// 	],
+// ]);
+
+// // send the request and get a bool response from it
+// $response = curl_exec($ch);
+
+// //capture any errors if exec above fails
+// $err = curl_error($ch);
+
+// // close the session and free up resources
+// curl_close($ch);
+
+// if ($err){
+//     echo 'cURL Error #:' . $err;
+// }
+// else{
+//     $json = json_decode($response, true);
+//     $stock_data_array = $json['optionChain']['result'][0];
+// }
+
+
+// $quote_array = $stock_data_array['quote'];
+// echo "symbol: " . $quote_array['symbol'] . "<br/>";
+// echo "fiftyDayAverage: " . $quote_array['fiftyDayAverage'] . "<br/>";
+// echo "twoHundredDayAverage: " . $quote_array['twoHundredDayAverage'] . "<br/>";
+// echo "regularMarketPrice: " . $quote_array['regularMarketPrice'] . "<br/>";
+// echo "regularMarketDayHigh: " . $quote_array['regularMarketDayHigh'] . "<br/>";
+// echo "regularMarketDayLow: " . $quote_array['regularMarketDayLow'] . "<br/>";
+// echo "regularMarketPreviousClose: " . $quote_array['regularMarketPreviousClose'] . "<br/>";
+// echo "regularMarketOpen: " . $quote_array['regularMarketOpen'] . "<br/>";
+// echo "forwardPE: " . $quote_array['forwardPE'] . "<br/>";
+// echo "trailingAnnualDividendRate: " . $quote_array['trailingAnnualDividendRate'] . "<br/>";
+// echo "averageAnalystRating: " . $quote_array['averageAnalystRating'] . "<br/>";
+
+// loop through all stocks I have
+// place data in json or spreadsheet
