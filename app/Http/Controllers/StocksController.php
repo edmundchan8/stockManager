@@ -115,7 +115,6 @@ class StocksController extends Controller
 
         $last_stock_added = DB::table('stocks')
             ->latest('date')
-            ->where('owner', '=', $owner)
             ->first();
 
         $collection = collect(
@@ -127,5 +126,24 @@ class StocksController extends Controller
         return view('stocks.index')
         ->with('stocks', $stocks)
         ->with('lastStock', $last_stock_added);
+    }
+
+    public function showOwnerStock($stockName, $owner){
+        $stock = DB::table('stocks')
+            ->join('stock_data', 'stocks.tickerSymbol', '=', 'stock_data.tickerSymbol')
+            ->where('stocks.name', '=', $stockName)
+            ->where('owner','=',$owner)
+            ->orderBy('date')
+            ->get();
+
+         $total = DB::table('stocks')
+            ->where('name', '=', $stockName)
+            ->where('owner','=',$owner)
+            ->sum(DB::raw('price * quantity'));
+
+        return view('stocks.stockView')
+        ->with('name', $stockName)
+        ->with('total', $total)
+        ->with('stock', $stock);
     }
 }

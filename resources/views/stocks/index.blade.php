@@ -23,7 +23,11 @@
             @foreach($stocks as $stock)
                 @if ($stock->quantity != 0)
                     <tr>
-                        <th><a href="/stocks/{{$stock->name}}" class="text-decoration-none">{{$stock->name}}</a></th>
+                        @if(str_contains(url()->current(), 'owner'))
+                            <th><a href="/stocks/ownerStock/{{$stock->name}}/{{$stock->owner}}" class="text-decoration-none">{{$stock->name}}</a></th>
+                        @else
+                            <th><a href="/stocks/{{$stock->name}}" class="text-decoration-none">{{$stock->name}}</a></th>
+                        @endif
                         <td>{{$stock->quantity}}</td>
                         <td>${{$stock->regMarPrice}}</td>
                         <td>{{$stock->avgAnlRat}}</td>
