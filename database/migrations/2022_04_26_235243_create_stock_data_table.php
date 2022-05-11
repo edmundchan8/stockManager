@@ -15,7 +15,7 @@ class CreateStockDataTable extends Migration
     {
         Schema::create('stock_data', function (Blueprint $table) {
             $table->id();
-            $table->string('symbol');
+            $table->string('tickerSymbol');
             $table->decimal('fiftyDayAverage', 10, 2);
             $table->decimal('twoHundredDayAverage', 10, 2);
             $table->decimal('regularMarketPrice', 10, 2);
@@ -23,6 +23,8 @@ class CreateStockDataTable extends Migration
             $table->decimal('forwardPE', 10, 2)->nullable();
             $table->decimal('trailingAnnualDividendRate', 10, 2)->nullable();
             $table->string('averageAnalystRating')->nullable();
+            $table->string('averageAnalystOpinion')->nullable();
+            $table->timestamps();
         });
     }
 

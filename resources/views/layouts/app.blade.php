@@ -18,10 +18,10 @@
         <ul class="navbar-nav">
             @if (Request::is('stocks*'))
                 <li class="nav-item active" style="margin-right: 2rem;">
-                  <a class="nav-link h5" href="/stocks">Yau Yau's Stocks</a>
+                  <a class="nav-link h5" href="/stocks/owner/yauyau">Yau Yau's Stocks</a>
                 </li>
                 <li class="nav-item active" style="margin-right: 2rem;">
-                  <a class="nav-link h5" href="/stocks">Edmund Stocks</a>
+                  <a class="nav-link h5" href="/stocks/owner/edmund">Edmund Stocks</a>
                 </li>
             @elseif (Request::is('dividends*', 'filterDividends*'))
             <li class="nav-item" style="margin-right: 2rem;">

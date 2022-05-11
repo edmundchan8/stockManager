@@ -14,6 +14,9 @@
             <tr>
                 <th scope="col">Stock</th>
                 <th scope="col">Stock Qty</th>
+                <th scope="col">Current Market Price</th>
+                <th scope="col">Analyst Rating</th>
+                <th scope="col">Analyst Opinion</th>
             </tr>
         </thead>
         <tbody>
@@ -22,6 +25,9 @@
                     <tr>
                         <th><a href="/stocks/{{$stock->name}}" class="text-decoration-none">{{$stock->name}}</a></th>
                         <td>{{$stock->quantity}}</td>
+                        <td>${{$stock->regMarPrice}}</td>
+                        <td>{{$stock->avgAnlRat}}</td>
+                        <td>{{$stock->avgAnlOpn}}</td>
                     </tr>
                 @endif
             @endforeach

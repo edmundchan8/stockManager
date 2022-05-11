@@ -29,6 +29,7 @@ Route::get('/dividends/{stockName}', [DividendsController::class, 'show']);
 Route::get('/stocks', [StocksController::class, 'index'])->name('stocks');
 Route::post('/stocks', [StocksController::class, 'store']);
 Route::get('/stocks/{stockName}', [StocksController::class, 'show']);
+Route::get('/stocks/owner/{owner}', [StocksController::class, 'showOwner']);
 
 // login
 // Route::get('/login', [LoginController::class, 'index'])->name('login');
