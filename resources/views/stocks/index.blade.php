@@ -1,14 +1,12 @@
 @extends ('layouts.app')
 @section('content') 
 
-<h4>Stock Portfolio</h4>
+<h4>{{ ucfirst($stocks[0]->owner) }} Portfolio</h4>
 
 {{-- Add stocks component --}}
 @include('stocks.addStocks')
 
 {{-- Displaying current stocks from database  --}}
-
-    <h5>Stock Portfolio</h5>
     <table class="table">
         <thead>
             <tr>
@@ -29,6 +27,7 @@
                             <th><a href="/stocks/{{$stock->name}}" class="text-decoration-none">{{$stock->name}}</a></th>
                         @endif
                         <td>{{$stock->quantity}}</td>
+                        <td>${{ $stock->investmentTotal}}</td>
                         <td>${{$stock->regMarPrice}}</td>
                         <td>{{$stock->avgAnlRat}}</td>
                         <td>{{$stock->avgAnlOpn}}</td>
@@ -37,8 +36,13 @@
             @endforeach
         </tbody>
     <tr>
-        <th>Total Investments: ${{ $stocks->sum('total') }}</th>
+        <th>Total Investments: ${{ $stocks->sum('investmentTotal') }}</th>
         <th>Total Stocks: {{ $stocks->sum('quantity') }}</th>
+    </tr>
+    <tr>
+        <th>Current Portfolio Value: ${{ $stocks->sum('currentTotal') }}</th>
+        <th>Investment Difference: ${{ $stocks->sum('currentTotal') - $stocks->sum('investmentTotal') }}</th>
+        <th>Percent Difference: {{ ($stocks->sum('currentTotal') - $stocks->sum('investmentTotal')) / $stocks->sum('investmentTotal') * 100}}%</th>
     </tr>
     <tr>
         <th>Last Stock Added/Removed: {{ $lastStock->name }} on {{ $lastStock->date }}</th>

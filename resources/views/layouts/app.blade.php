@@ -21,7 +21,10 @@
                   <a class="nav-link h5" href="/stocks/owner/yauyau">Yau Yau's Stocks</a>
                 </li>
                 <li class="nav-item active" style="margin-right: 2rem;">
-                  <a class="nav-link h5" href="/stocks/owner/edmund">Edmund Stocks</a>
+                  <a class="nav-link h5" href="/stocks/owner/edmund">Edmund's Stocks</a>
+                </li>
+                <li class="nav-item active" style="margin-right: 2rem;">
+                  <a class="nav-link h5" href="/stocks/owner/priscilla">Priscilla's Stocks</a>
                 </li>
             @elseif (Request::is('dividends*', 'filterDividends*'))
             <li class="nav-item" style="margin-right: 2rem;">

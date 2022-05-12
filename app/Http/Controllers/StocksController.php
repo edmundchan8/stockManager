@@ -23,7 +23,7 @@ class StocksController extends Controller
             ->leftJoin('stock_data', 'stocks.tickerSymbol', '=', 'stock_data.tickerSymbol')
             //->select('name', 'quantity', 'owner' ,'stocks.tickerSymbol', 'regularMarketPrice')
             ->groupBy('name')
-            ->selectRaw('SUM(quantity) as quantity, SUM(quantity*price) as total, MIN(owner) as owner, MIN(regularMarketPrice) as regMarPrice, 
+            ->selectRaw('SUM(quantity) as quantity, SUM(quantity*price) as investmentTotal, SUM(quantity*regularMarketPrice) as currentTotal,  MIN(owner) as owner, MIN(regularMarketPrice) as regMarPrice, 
             MIN(averageAnalystRating) as avgAnlRat, MIN(averageAnalystOpinion) as avgAnlOpn, name')
             ->get();
 
@@ -109,7 +109,7 @@ class StocksController extends Controller
             //->select('name', 'quantity', 'owner' ,'stocks.tickerSymbol', 'regularMarketPrice')
             ->groupBy('name')
             ->where('owner', '=', $owner)
-            ->selectRaw('SUM(quantity) as quantity, SUM(quantity*price) as total, MIN(owner) as owner, MIN(regularMarketPrice) as regMarPrice, 
+            ->selectRaw('SUM(quantity) as quantity, SUM(quantity*price) as investmentTotal, SUM(quantity*regularMarketPrice) as currentTotal, MIN(owner) as owner, MIN(regularMarketPrice) as regMarPrice, 
             MIN(averageAnalystRating) as avgAnlRat, MIN(averageAnalystOpinion) as avgAnlOpn, name')
             ->get();
 
@@ -122,7 +122,7 @@ class StocksController extends Controller
         );
         
         $sorted = $collection->sortBy('name');    
-
+        
         return view('stocks.index')
         ->with('stocks', $stocks)
         ->with('lastStock', $last_stock_added);
