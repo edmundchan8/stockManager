@@ -23,8 +23,8 @@
             <tr>
                 <td>{{$eachStock->date}}</td>
                 <td>${{$eachStock->price}}</td>
-                <td>{{$eachStock->quantity}}</td>
-                <td>${{$eachStock->quantity * $eachStock->price}}</td>
+                <td>{{round($eachStock->quantity, 3)}}</td>
+                <td>${{round($eachStock->quantity * $eachStock->price, 2)}}</td>
                 <td>{{$eachStock->owner}}</td>
                 <td><a href="{{route('edit', ['id' => $eachStock->id])}}">Edit</a></td>
             </tr>
@@ -32,9 +32,9 @@
         </tbody>
     <tr>
         
-        <th>Total Cost: ${{ $total }}</th>
-        <th>Average Cost per Share: ${{ $total/$stock->sum('quantity') }}</th>
-        <th>Total Stocks: {{ $stock->sum('quantity') }}</th>
+        <th>Total Cost: ${{ round($total, 2) }}</th>
+        <th>Average Cost per Share: ${{ round($total/$stock->sum('quantity'), 2) }}</th>
+        <th>Total Stocks: {{ round($stock->sum('quantity'), 3) }}</th>
     </tr>
 </table>
 

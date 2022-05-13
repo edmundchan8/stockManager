@@ -20,7 +20,7 @@ class ApiController extends Controller
         'trailingAnnualDividendRate', 'averageAnalystRating']
         ;
 
-        $API_KEY = "x-api-key: kLpElFYd3h7WQndw9CtJ32BoTtCDMoRi3bn1J362";
+        $API_KEY = "x-api-key: TXpeOkH9Et5fFcwdlfXDp7QXGDoCjmuka6ryVLoX";
 
         $default_url = "https://yfapi.net/v7/finance/options/";
 

@@ -30,8 +30,8 @@
                         @else
                             <th><a href="/stocks/{{$stock->name}}" class="text-decoration-none">{{$stock->name}}</a></th>
                         @endif
-                        <td>{{$stock->quantity}}</td>
-                        <td>${{ $stock->investmentTotal}}</td>
+                        <td>{{round($stock->quantity, 3)}}</td>
+                        <td>${{round($stock->investmentTotal, 2)}}</td>
                         <td>${{$stock->regMarPrice}}</td>
                         <td>{{$stock->avgAnlRat}}</td>
                         <td>{{$stock->avgAnlOpn}}</td>
@@ -40,13 +40,13 @@
             @endforeach
         </tbody>
     <tr>
-        <th>Total Investments: ${{ $stocks->sum('investmentTotal') }}</th>
-        <th>Total Stocks: {{ $stocks->sum('quantity') }}</th>
+        <th>Total Investments: ${{ round($stocks->sum('investmentTotal'), 2) }}</th>
+        <th>Total Stocks: {{ round($stocks->sum('quantity'), 3) }}</th>
     </tr>
     <tr>
-        <th>Current Portfolio Value: ${{ $stocks->sum('currentTotal') }}</th>
-        <th>Investment Difference: ${{ $stocks->sum('currentTotal') - $stocks->sum('investmentTotal') }}</th>
-        <th>Percent Difference: {{ ($stocks->sum('currentTotal') - $stocks->sum('investmentTotal')) / $stocks->sum('investmentTotal') * 100}}%</th>
+        <th>Current Portfolio Value: ${{ round($stocks->sum('currentTotal'), 2) }}</th>
+        <th>Investment Difference: ${{ round($stocks->sum('currentTotal') - $stocks->sum('investmentTotal'), 2) }}</th>
+        <th>Percent Difference: {{ round(($stocks->sum('currentTotal') - $stocks->sum('investmentTotal')) / $stocks->sum('investmentTotal') * 100, 2)}}%</th>
     </tr>
     <tr>
         <th>Last Stock Added/Removed: {{ $lastStock->name }} on {{ $lastStock->date }}</th>
