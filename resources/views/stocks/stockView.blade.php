@@ -16,6 +16,7 @@
                 <th scope="col">Quantity Bought/Sold</th>
                 <th scope="col">Total Cost</th>
                 <th scope="col">Owner</th>
+                <th scope="col">Edit</th>
             </tr>
         </thead>
         <tbody>

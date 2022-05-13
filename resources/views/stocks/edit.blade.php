@@ -2,8 +2,10 @@
 @section('content')
 <h4>Edit {{$stock->name}} -  ID: {{$stock->id}}</h4> 
 <br>
-<form method="PUT" action="{{url('stocks')}}">
+<form method="POST" action="{{route('update')}}">
     @csrf
+    <input type="hidden" name="_method" value="PUT">
+    <input type="hidden" name="id" value={{$stock->id}}>
     <div class="form-group m-3">
         <input class="form-control" type="hidden" name="current_stock_db" value="stocks">
         <label>Stock Name</label>

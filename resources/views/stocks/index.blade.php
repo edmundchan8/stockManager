@@ -16,6 +16,7 @@
             <tr>
                 <th scope="col">Stock</th>
                 <th scope="col">Stock Qty</th>
+                <th scope="col">Investment Total</th>
                 <th scope="col">Current Market Price</th>
                 <th scope="col">Analyst Rating</th>
                 <th scope="col">Analyst Opinion</th>
@@ -26,9 +27,9 @@
                 @if ($stock->quantity != 0)
                     <tr>
                         @if(str_contains(url()->current(), 'owner'))
-                            <th><a href="/stocks/ownerStock/{{$stock->name}}/{{$stock->owner}}" class="text-decoration-none">{{$stock->name}}</a></th>
+                            <td><a href="/stocks/ownerStock/{{$stock->name}}/{{$stock->owner}}" class="text-decoration-none">{{$stock->name}}</a></td>
                         @else
-                            <th><a href="/stocks/{{$stock->name}}" class="text-decoration-none">{{$stock->name}}</a></th>
+                            <td><a href="/stocks/{{$stock->name}}" class="text-decoration-none">{{$stock->name}}</a></td>
                         @endif
                         <td>{{round($stock->quantity, 3)}}</td>
                         <td>${{round($stock->investmentTotal, 2)}}</td>

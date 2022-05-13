@@ -39,7 +39,6 @@ class StocksController extends Controller
     }
 
     public function store(Request $request){
-
         // Form validation
         $validated = $request->validate([
             'stockName' => 'required',
@@ -90,21 +89,28 @@ class StocksController extends Controller
             'owner' => 'required'
         ]);
 
-        $name = $request->name;
+        // find the stock to update
+        $stock = DB::table('stocks')->find($request->id);
+
+        $name = $request->stockName;
         $tickerSymbol = $request->tickerSymbol;
         $buyOrSell = $request->buyOrSell;
-        $price = $request->price;
-        $quantity = $request->quantity;
+        $price = $request->stockPrice;
+        $quantity = $request->stockQty;
         $owner = $request->owner;
+        $date = $request->date;
         $message = "Your stock was successfully updated!";
 
         // add stock to database
-        DB::table('stocks')->update(
-            ['name' => $name, 'tickerSymbol' => $tickerSymbol, 'buySell'=> $buyOrSell, 'price' => $price, 'quantity' => $quantity, 'date' => $date, 'owner' => $owner]
+        DB::table('stocks')
+        ->where('id', $request->id)
+        ->limit(1)
+        ->update(['name' => $name, 'tickerSymbol' => $tickerSymbol, 'buySell'=> $buyOrSell, 'price' => $price, 'quantity' => $quantity, 'date' => $date, 'owner' => $owner]
         );
         // if validations work, redirect to previous page (index page)
         // have a section called 'success', that when is 'has' on the view blade, will show a notification that says the form submission was successful
-        return back()->with('success', $message);
+        return redirect('stocks')
+            ->with('success', $message);
     }
 
     public function show($stockName){

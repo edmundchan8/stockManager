@@ -32,7 +32,7 @@ Route::get('/stocks/{stockName}', [StocksController::class, 'show']);
 Route::get('/stocks/owner/{owner}', [StocksController::class, 'showOwner']);
 Route::get('/stocks/ownerStock/{stockName}/{owner}', [StocksController::class, 'showOwnerStock']);
 Route::get('/edit/{id}', [StocksController::class, 'edit'])->name('edit');
-Route::put('/stocks', [StocksController::class, 'update']);
+Route::put('/stocks', [StocksController::class, 'update'])->name('update');
 
 
 // login
