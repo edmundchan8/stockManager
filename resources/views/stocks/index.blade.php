@@ -1,7 +1,11 @@
 @extends ('layouts.app')
 @section('content') 
 
-<h4>{{ ucfirst($stocks[0]->owner) }} Portfolio</h4>
+@if(str_contains(url()->current(), 'owner'))
+    <h4>{{ ucfirst($stocks[0]->owner) }} Portfolio</h4>
+@else
+    <h4>Stock Portfolio</h4>
+@endif
 
 {{-- Add stocks component --}}
 @include('stocks.addStocks')

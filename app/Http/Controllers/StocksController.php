@@ -18,7 +18,7 @@ class StocksController extends Controller
         $last_stock_added = DB::table('stocks')
             ->latest('date')
             ->first();
-        
+
         $stocks = DB::table('stocks')
             ->leftJoin('stock_data', 'stocks.tickerSymbol', '=', 'stock_data.tickerSymbol')
             //->select('name', 'quantity', 'owner' ,'stocks.tickerSymbol', 'regularMarketPrice')
@@ -26,7 +26,7 @@ class StocksController extends Controller
             ->selectRaw('SUM(quantity) as quantity, SUM(quantity*price) as investmentTotal, SUM(quantity*regularMarketPrice) as currentTotal,  MIN(owner) as owner, MIN(regularMarketPrice) as regMarPrice, 
             MIN(averageAnalystRating) as avgAnlRat, MIN(averageAnalystOpinion) as avgAnlOpn, name')
             ->get();
-
+        
         $collection = collect(
             $stocks
         );
@@ -79,34 +79,59 @@ class StocksController extends Controller
         // return Redirect::to('stocks/index')->with('message', 'Failed to Add Stock');
     }
 
+    public function update(Request $request){
+        // Form validation
+        $validated = $request->validate([
+            'stockName' => 'required',
+            'buyOrSell' => 'required',
+            'stockPrice'=>'required',
+            'stockQty' => 'required',
+            'date' => 'required',
+            'owner' => 'required'
+        ]);
+
+        $name = $request->name;
+        $tickerSymbol = $request->tickerSymbol;
+        $buyOrSell = $request->buyOrSell;
+        $price = $request->price;
+        $quantity = $request->quantity;
+        $owner = $request->owner;
+        $message = "Your stock was successfully updated!";
+
+        // add stock to database
+        DB::table('stocks')->update(
+            ['name' => $name, 'tickerSymbol' => $tickerSymbol, 'buySell'=> $buyOrSell, 'price' => $price, 'quantity' => $quantity, 'date' => $date, 'owner' => $owner]
+        );
+        // if validations work, redirect to previous page (index page)
+        // have a section called 'success', that when is 'has' on the view blade, will show a notification that says the form submission was successful
+        return back()->with('success', $message);
+    }
+
     public function show($stockName){
         $stock = DB::table('stocks')
-            ->join('stock_data', 'stocks.tickerSymbol', '=', 'stock_data.tickerSymbol')
             ->where('stocks.name', '=', $stockName)
             ->orderBy('date')
             ->get();
 
-        //dd($stock);
-         $total = DB::table('stocks')
+        $stockData = DB::table('stock_data')
+        ->where('stock_data.tickerSymbol', '=', $stock[0]->tickerSymbol)
+        ->get();
+
+        $total = DB::table('stocks')
             ->where('name', '=', $stockName)
             ->sum(DB::raw('price * quantity'));
-
-        //dd($total);
 
         return view('stocks.stockView')
         ->with('name', $stockName)
         ->with('total', $total)
-        ->with('stock', $stock);
+        ->with('stock', $stock)
+        ->with('data', $stockData[0]);
     }
 
     public function showOwner($owner){
-        // $stocks = DB::table('stocks')
-        // ->where('owner', '=', $owner)
-        // ->get();
 
         $stocks = DB::table('stocks')
             ->leftJoin('stock_data', 'stocks.tickerSymbol', '=', 'stock_data.tickerSymbol')
-            //->select('name', 'quantity', 'owner' ,'stocks.tickerSymbol', 'regularMarketPrice')
             ->groupBy('name')
             ->where('owner', '=', $owner)
             ->selectRaw('SUM(quantity) as quantity, SUM(quantity*price) as investmentTotal, SUM(quantity*regularMarketPrice) as currentTotal, MIN(owner) as owner, MIN(regularMarketPrice) as regMarPrice, 
@@ -130,20 +155,31 @@ class StocksController extends Controller
 
     public function showOwnerStock($stockName, $owner){
         $stock = DB::table('stocks')
-            ->join('stock_data', 'stocks.tickerSymbol', '=', 'stock_data.tickerSymbol')
             ->where('stocks.name', '=', $stockName)
             ->where('owner','=',$owner)
             ->orderBy('date')
             ->get();
 
-         $total = DB::table('stocks')
-            ->where('name', '=', $stockName)
-            ->where('owner','=',$owner)
-            ->sum(DB::raw('price * quantity'));
+        $stockData = DB::table('stock_data')
+        ->where('stock_data.tickerSymbol', '=', $stock[0]->tickerSymbol)
+        ->get();
+
+        $total = DB::table('stocks')
+        ->where('name', '=', $stockName)
+        ->where('owner','=',$owner)
+        ->sum(DB::raw('price * quantity'));
 
         return view('stocks.stockView')
         ->with('name', $stockName)
         ->with('total', $total)
+        ->with('data', $stockData[0])
+        ->with('stock', $stock);
+    }
+
+    public function edit(Request $request){
+        $stock = DB::table('stocks')->find($request->id);
+        //dd($stock);
+        return view('stocks.edit')
         ->with('stock', $stock);
     }
 }

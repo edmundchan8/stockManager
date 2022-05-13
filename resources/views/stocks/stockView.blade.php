@@ -4,9 +4,9 @@
 <br>
 
 <h5>Stock Portfolio</h5>
-<p><strong>Current Price: ${{$stock[0]->regularMarketPrice}}</strong> | <strong>Previous Closing Price: ${{$stock[0]->regularMarketPreviousClose}}</strong> | <strong>Analyst Rating: {{$stock[0]->averageAnalystRating}}</strong></p>
-<p><strong>50 Day Average: ${{$stock[0]->fiftyDayAverage}}</strong> | <strong>200 Day Average: ${{$stock[0]->twoHundredDayAverage}}</strong> | <strong>Forward PE: {{$stock[0]->forwardPE}}</strong></p>
-<p><strong>Trailing Annual Dividend Rate: ${{$stock[0]->trailingAnnualDividendRate}}</strong></p>
+<p><strong>Current Price: ${{$data->regularMarketPrice}}</strong> | <strong>Previous Closing Price: ${{$data->regularMarketPreviousClose}}</strong> | <strong>Analyst Rating: {{$data->averageAnalystRating}}</strong></p>
+<p><strong>50 Day Average: ${{$data->fiftyDayAverage}}</strong> | <strong>200 Day Average: ${{$data->twoHundredDayAverage}}</strong> | <strong>Forward PE: {{$data->forwardPE}}</strong></p>
+<p><strong>Trailing Annual Dividend Rate: ${{$data->trailingAnnualDividendRate}}</strong></p>
 
     <table class="table">
         <thead>
@@ -26,6 +26,7 @@
                 <td>{{$eachStock->quantity}}</td>
                 <td>${{$eachStock->quantity * $eachStock->price}}</td>
                 <td>{{$eachStock->owner}}</td>
+                <td><a href="{{route('edit', ['id' => $eachStock->id])}}">Edit</a></td>
             </tr>
             @endforeach
         </tbody>
