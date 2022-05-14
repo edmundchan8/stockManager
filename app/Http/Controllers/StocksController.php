@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
 
 class StocksController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // group total stocks by name
         // then run a raw sql code, where you use selectRaw to run raw sql
@@ -30,11 +30,23 @@ class StocksController extends Controller
         $collection = collect(
             $stocks
         );
-        
-        $sorted = $collection->sortBy('name');//('quantity');
 
+        $sortByName = "name";
+        if (isset($request->sortBy)){
+            $sortByName = $request->sortBy;
+            $sorted = $collection->sortBy($sortByName);
+        }
+        else if (isset($request->sortByDesc)){
+            $sortByName = $request->sortByDesc;
+            $sorted = $collection->sortByDesc($sortByName);
+        }
+        else{
+            $sorted = $collection->sortBy($sortByName);
+        }
+        
+       
         return view('stocks.index')
-            ->with('stocks', $stocks)
+            ->with('stocks', $sorted)
             ->with('lastStock', $last_stock_added);
     }
 

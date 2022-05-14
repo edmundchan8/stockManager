@@ -14,12 +14,43 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Stock</th>
-                <th scope="col">Stock Qty</th>
-                <th scope="col">Investment Total</th>
-                <th scope="col">Current Market Price</th>
-                <th scope="col">Analyst Rating</th>
-                <th scope="col">Analyst Opinion</th>
+                <th scope="col">Stock
+                    <a href={{ route('stocks', ['sortBy' => 'name'])}}><img src="{{ asset('/upArrow.png') }}" 
+                        alt="up arrow" style="height: 10px;"></a>
+                    <a href={{ route('stocks', ['sortByDesc' => 'name'])}}><img src="{{ asset('/downArrow.png') }}"
+                        alt="down arrow" style="height: 10px;"></a>
+                </th>
+                <th scope="col">Stock Qty
+                    <a href={{ route('stocks', ['sortBy' => 'quantity'])}}><img src="{{ asset('/upArrow.png') }}" 
+                        alt="up arrow" style="height: 10px;"></a>
+                    <a href={{ route('stocks', ['sortByDesc' => 'quantity'])}}><img src="{{ asset('/downArrow.png') }}"
+                        alt="down arrow" style="height: 10px;"></a>
+                </th>
+                <th scope="col">Investment Total
+                    <a href={{ route('stocks', ['sortBy' => 'investmentTotal'])}}><img src="{{ asset('/upArrow.png') }}" 
+                        alt="up arrow" style="height: 10px;"></a>
+                    <a href={{ route('stocks', ['sortByDesc' => 'investmentTotal'])}}><img src="{{ asset('/downArrow.png') }}"
+                        alt="down arrow" style="height: 10px;"></a>
+                </th>
+                <th scope="col">
+                    Market Price
+                    <a href={{ route('stocks', ['sortBy' => 'regMarPrice'])}}><img src="{{ asset('/upArrow.png') }}" 
+                        alt="up arrow" style="height: 10px;"></a>
+                    <a href={{ route('stocks', ['sortByDesc' => 'regMarPrice'])}}><img src="{{ asset('/downArrow.png') }}"
+                        alt="down arrow" style="height: 10px;"></a>
+                </th>
+                <th scope="col">Analyst Rating
+                    <a href={{ route('stocks', ['sortBy' => 'avgAnlRat'])}}><img src="{{ asset('/upArrow.png') }}" 
+                        alt="up arrow" style="height: 10px;"></a>
+                    <a href={{ route('stocks', ['sortByDesc' => 'avgAnlRat'])}}><img src="{{ asset('/downArrow.png') }}"
+                        alt="down arrow" style="height: 10px;"></a>
+                </th>
+                <th scope="col">Analyst Opinion
+                    <a href={{ route('stocks', ['sortBy' => 'avgAnlOpn'])}}><img src="{{ asset('/upArrow.png') }}" 
+                        alt="up arrow" style="height: 10px;"></a>
+                    <a href={{ route('stocks', ['sortByDesc' => 'avgAnlOpn'])}}><img src="{{ asset('/downArrow.png') }}"
+                        alt="down arrow" style="height: 10px;"></a>
+                </th>
             </tr>
         </thead>
         <tbody>

@@ -11,8 +11,18 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Stock</th>
-                <th scope="col">Dividend Given Out</th>
+                <th scope="col">Stock
+                    <a href={{ route('dividends', ['sortBy' => 'name'])}}><img src="{{ asset('/upArrow.png') }}" 
+                        alt="up arrow" style="height: 10px;"></a>
+                    <a href={{ route('dividends', ['sortByDesc' => 'name'])}}><img src="{{ asset('/downArrow.png') }}"
+                        alt="down arrow" style="height: 10px;"></a>
+                </th>
+                <th scope="col">Dividend Given Out
+                    <a href={{ route('dividends', ['sortBy' => 'amount'])}}><img src="{{ asset('/upArrow.png') }}" 
+                        alt="up arrow" style="height: 10px;"></a>
+                    <a href={{ route('dividends', ['sortByDesc' => 'amount'])}}><img src="{{ asset('/downArrow.png') }}"
+                        alt="down arrow" style="height: 10px;"></a>
+                </th>
             </tr>
         </thead>
         <tbody>

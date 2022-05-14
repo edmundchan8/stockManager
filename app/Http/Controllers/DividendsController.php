@@ -5,23 +5,41 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Illuminate\Support\Collection;
 
 class DividendsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $dividends = DB::table('dividends')
             ->groupBy('name')
             ->selectRaw('SUM(amount) as amount, name')
             ->get();
         
+        $collection = collect(
+            $dividends
+        );
+        
+        $sortByName = "name";
+        if (isset($request->sortBy)){
+            $sortByName = $request->sortBy;
+            $sorted = $collection->sortBy($sortByName);
+        }
+        else if (isset($request->sortByDesc)){
+            $sortByName = $request->sortByDesc;
+            $sorted = $collection->sortByDesc($sortByName);
+        }
+        else{
+            $sorted = $collection->sortBy($sortByName);
+        }
+
         // Getting the last dividend added to the database
         $lastDividend = DB::table('dividends')
             ->latest('date')
             ->first();
         
         return view('dividends.index')
-        ->with('dividends', $dividends)
+        ->with('dividends', $sorted)
         ->with('lastDiv', $lastDividend);
     }
 
