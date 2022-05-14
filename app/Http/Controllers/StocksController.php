@@ -17,7 +17,7 @@ class StocksController extends Controller
 
         $last_stock_added = DB::table('stocks')
             ->latest('date')
-            ->first();
+            ->first();            
 
         $stocks = DB::table('stocks')
             ->leftJoin('stock_data', 'stocks.tickerSymbol', '=', 'stock_data.tickerSymbol')
@@ -26,7 +26,7 @@ class StocksController extends Controller
             ->selectRaw('SUM(quantity) as quantity, SUM(quantity*price) as investmentTotal, SUM(quantity*regularMarketPrice) as currentTotal,  MIN(owner) as owner, MIN(regularMarketPrice) as regMarPrice, 
             MIN(averageAnalystRating) as avgAnlRat, MIN(averageAnalystOpinion) as avgAnlOpn, name')
             ->get();
-        
+
         $collection = collect(
             $stocks
         );

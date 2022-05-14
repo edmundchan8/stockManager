@@ -82,18 +82,42 @@ class ApiController extends Controller
             // set average analyst rating to null, or if available split rating and buy/sell/hold value out
             isset($quote_array['averageAnalystRating']) ? $avgAnalystRating = explode(" - ", $quote_array['averageAnalystRating']) : '';
 
-            DB::table('stock_data')->insert([
-                'tickerSymbol' => $quote_array['symbol'],
-                'fiftyDayAverage' => $quote_array['fiftyDayAverage'],
-                'twoHundredDayAverage' => $quote_array['twoHundredDayAverage'],
-                'regularMarketPrice' => $quote_array['regularMarketPrice'],
-                'regularMarketPreviousClose' => $quote_array['regularMarketPreviousClose'],
-                'forwardPE' => $forwardPE,
-                'trailingAnnualDividendRate' => $trailingDivRate,
-                'averageAnalystRating' => $avgAnalystRating[0],
-                'averageAnalystOpinion' => $avgAnalystRating[1],
-                'created_at' => date('Y-m-d H:i:s')
-            ]);
+            $stock_data_table = DB::table('stock_data');
+
+            if ($stock_data_table->where('tickerSymbol', $quote_array['symbol'])->exists()){
+                $current_stock = $stock_data_table->where('tickerSymbol', $quote_array['symbol'])->first();
+                $stock_data_table
+                    ->where('id', $current_stock->id)
+                    ->limit(1)
+                    ->update([
+                    'tickerSymbol' => $quote_array['symbol'],
+                    'fiftyDayAverage' => $quote_array['fiftyDayAverage'],
+                    'twoHundredDayAverage' => $quote_array['twoHundredDayAverage'],
+                    'regularMarketPrice' => $quote_array['regularMarketPrice'],
+                    'regularMarketPreviousClose' => $quote_array['regularMarketPreviousClose'],
+                    'forwardPE' => $forwardPE,
+                    'trailingAnnualDividendRate' => $trailingDivRate,
+                    'averageAnalystRating' => $avgAnalystRating[0],
+                    'averageAnalystOpinion' => $avgAnalystRating[1],
+                    'created_at' => date('Y-m-d H:i:s')
+                ]);
+            }
+            else{
+                $stock_data_table
+                    ->insert([
+                    'tickerSymbol' => $quote_array['symbol'],
+                    'fiftyDayAverage' => $quote_array['fiftyDayAverage'],
+                    'twoHundredDayAverage' => $quote_array['twoHundredDayAverage'],
+                    'regularMarketPrice' => $quote_array['regularMarketPrice'],
+                    'regularMarketPreviousClose' => $quote_array['regularMarketPreviousClose'],
+                    'forwardPE' => $forwardPE,
+                    'trailingAnnualDividendRate' => $trailingDivRate,
+                    'averageAnalystRating' => $avgAnalystRating[0],
+                    'averageAnalystOpinion' => $avgAnalystRating[1],
+                    'created_at' => date('Y-m-d H:i:s')
+                ]);
+            }
+
             echo "symbol: " . $quote_array['symbol'] . "<br/>";
             echo "fiftyDayAverage: " . $quote_array['fiftyDayAverage'] . "<br/>";
             echo "twoHundredDayAverage: " . $quote_array['twoHundredDayAverage'] . "<br/>";
