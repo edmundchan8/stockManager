@@ -4,10 +4,10 @@
     <canvas id="myChart" width="400" height="400"></canvas>
 </div>
 <button onclick="toggleMonYea()">Month/Year</button>
-<p class="mt-4">Your Average Monthly Dividend within the last 12 months is: <strong>${{$lastTwelveMonths/12}}</strong></p>
-<p class="mt-4">Your Average Daily Dividend within the last 12 months is: <strong>${{$lastTwelveMonths/365}}</strong></p>
-<p class="mt-4">Your Average Hourly Dividend within the last 12 months is: <strong>${{$lastTwelveMonths/8760.01}}</strong></p>
-
+<h4 class="mt-4">Your Average Monthly Dividend within the last 12 months is: <strong>${{round($lastTwelveMonths/12, 2)}}</strong></h4>
+<h4 class="mt-4">Your Average Daily Dividend within the last 12 months is: <strong>${{round($lastTwelveMonths/365,2)}}</strong></h4>
+<h4 class="mt-4">Your Average Hourly Dividend within the last 12 months is: <strong>${{round($lastTwelveMonths/8760.01,2)}}</strong></h4>
+<br/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     let labels = {!! $months !!};

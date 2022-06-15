@@ -20,7 +20,9 @@ class ApiController extends Controller
         'trailingAnnualDividendRate', 'averageAnalystRating']
         ;
 
-        $API_KEY = "x-api-key: TXpeOkH9Et5fFcwdlfXDp7QXGDoCjmuka6ryVLoX";
+        //
+
+        $API_KEY = "x-api-key: 4hCtfuh6QG45G1nA9mMSA2xdPu4swEo5gwyxc0R2";
 
         $default_url = "https://yfapi.net/v7/finance/options/";
 
@@ -65,6 +67,10 @@ class ApiController extends Controller
             }
             else{
                 $json = json_decode($response, true);
+                if(!isset($json['optionChain'])){
+                    echo 'May need to update API Key';
+                    return;
+                }
                 $stock_data_array = $json['optionChain']['result'][0];
             }
             $quote_array = $stock_data_array['quote'];
@@ -116,18 +122,19 @@ class ApiController extends Controller
                     'averageAnalystOpinion' => $avgAnalystRating[1],
                     'created_at' => date('Y-m-d H:i:s')
                 ]);
-            }
+            }   
+            echo "Stocks Updated!";
 
-            echo "symbol: " . $quote_array['symbol'] . "<br/>";
-            echo "fiftyDayAverage: " . $quote_array['fiftyDayAverage'] . "<br/>";
-            echo "twoHundredDayAverage: " . $quote_array['twoHundredDayAverage'] . "<br/>";
-            echo "regularMarketPrice: " . $quote_array['regularMarketPrice'] . "<br/>";
-            echo "regularMarketPreviousClose: " . $quote_array['regularMarketPreviousClose'] . "<br/>";
-            echo "regularMarketOpen: " . $quote_array['regularMarketOpen'] . "<br/>";
-            echo "forwardPE: " . $forwardPE . "<br/>";
-            echo "trailingAnnualDividendRate: " . $trailingDivRate . "<br/>";
-            echo "averageAnalystRating: " . $avgAnalystRating[0] . "<br/>";
-            echo "averageAnalystOpinion: " . $avgAnalystRating[1] . "<br/><br/>";
+            // echo "symbol: " . $quote_array['symbol'] . "<br/>";
+            // echo "fiftyDayAverage: " . $quote_array['fiftyDayAverage'] . "<br/>";
+            // echo "twoHundredDayAverage: " . $quote_array['twoHundredDayAverage'] . "<br/>";
+            // echo "regularMarketPrice: " . $quote_array['regularMarketPrice'] . "<br/>";
+            // echo "regularMarketPreviousClose: " . $quote_array['regularMarketPreviousClose'] . "<br/>";
+            // echo "regularMarketOpen: " . $quote_array['regularMarketOpen'] . "<br/>";
+            // echo "forwardPE: " . $forwardPE . "<br/>";
+            // echo "trailingAnnualDividendRate: " . $trailingDivRate . "<br/>";
+            // echo "averageAnalystRating: " . $avgAnalystRating[0] . "<br/>";
+            // echo "averageAnalystOpinion: " . $avgAnalystRating[1] . "<br/><br/>";
         }
         return view('data.index');
     }
