@@ -126,6 +126,7 @@ class StocksController extends Controller
     }
 
     public function show($stockName){
+        dump($stockName);
         $stock = DB::table('stocks')
             ->where('stocks.name', '=', $stockName)
             ->orderBy('date')
