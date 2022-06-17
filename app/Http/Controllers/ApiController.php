@@ -14,7 +14,7 @@ class ApiController extends Controller
 
     public function index()
     {
-        $ticker_stocks_array = ['AAPL', 'AMZN', 'APAM', 'BEP', 'CAH', 'COST', 'EBET', 'FB', 'GOOG', 'HAS', 'HD', 'HOOD', 'JEPI', 'JNJ', 'JPM', 'LUMN', 'MSFT', 
+        $ticker_stocks_array = ['AAPL', 'AMZN', 'APAM', 'BEP', 'CAH', 'COST', 'EBET', 'META', 'GOOG', 'HAS', 'HD', 'HOOD', 'JEPI', 'JNJ', 'JPM', 'LUMN', 'MSFT', 
         'NEE', 'NHI', 'O', 'PG', 'PLTR', 'SBUX', 'SCHD', 'TCEHY', 'TROW', 'TSLA', 'VICI', 'WASH', 'BAT-USD', 'BTC-USD', 'ETH-USD', 'LINK-USD'];
         $stock_table_columns = ['symbol', 'fiftyDayAverage', 'twoHundredDayAverage', 'regularMarketPrice', 'regularMarketPreviousClose', 'forwardPE', 
         'trailingAnnualDividendRate', 'averageAnalystRating']
